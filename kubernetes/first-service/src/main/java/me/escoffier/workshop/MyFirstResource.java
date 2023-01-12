@@ -1,5 +1,10 @@
 package me.escoffier.workshop;
 
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -13,7 +18,8 @@ public class MyFirstResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String print() {      
+    @Counted("first-service.print.invocations")  // <--- Added to keep track of the number of invocations
+    public String print() {
         return "hello from " + System.getenv("HOSTNAME") + ", it's " + now();
     }
 
@@ -25,4 +31,21 @@ public class MyFirstResource {
         return sdf.format(cal.getTime());
     }
 
+    @Inject @RestClient SecondServiceClient client;
+
+    @GET
+    @Path("/quote")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Timed("first-service.printWithQuote.time")  // <-- Added to measure the time spent in this method
+    public String printWithQuote() {
+        return "hello from " + System.getenv("HOSTNAME") + ", " + client.getQuote();
+    }
+
+
+    @GET
+    @Path("/crash")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String crashSecondService() {
+        return client.crash();
+    }
 }

@@ -1,0 +1,67 @@
+Name:             hero-microservice-5c98666c6-c2jgt
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 13 Jan 2023 13:42:25 +0100
+Labels:           app=hero-microservice
+                  pod-template-hash=5c98666c6
+Annotations:      <none>
+Status:           Running
+IP:               172.17.0.13
+IPs:
+  IP:           172.17.0.13
+Controlled By:  ReplicaSet/hero-microservice-5c98666c6
+Containers:
+  hero-microservice:
+    Container ID:   docker://998dd42ef15e2d4221ca347c14fe7618e7e435b4205c6b9839b0b57eb37b8e19
+    Image:          workshop/hero-microservice:latest
+    Image ID:       docker://sha256:d944020e3f2370ed33bc885c73c513ed374602fb1cf4130931108ad2080d698b
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    143
+      Started:      Fri, 13 Jan 2023 13:47:10 +0100
+      Finished:     Fri, 13 Jan 2023 13:47:37 +0100
+    Ready:          False
+    Restart Count:  6
+    Liveness:       http-get http://:8080/q/health/live delay=0s timeout=2s period=5s #success=1 #failure=1
+    Readiness:      http-get http://:8080/q/health/ready delay=0s timeout=10s period=30s #success=1 #failure=3
+    Environment:
+      QUARKUS_DATASOURCE_URL:       <set to the key 'database' of config map 'hero-config'>       Optional: false
+      QUARKUS_DATASOURCE_USERNAME:  <set to the key 'username' in secret 'hero-database-secret'>  Optional: false
+      QUARKUS_DATASOURCE_PASSWORD:  <set to the key 'password' in secret 'hero-database-secret'>  Optional: false
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-tdfsz (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-tdfsz:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                     From               Message
+  ----     ------     ----                    ----               -------
+  Normal   Scheduled  6m45s                   default-scheduler  Successfully assigned default/hero-microservice-5c98666c6-c2jgt to minikube
+  Normal   Pulled     6m22s (x3 over 6m41s)   kubelet            Container image "workshop/hero-microservice:latest" already present on machine
+  Normal   Created    6m22s (x3 over 6m39s)   kubelet            Created container hero-microservice
+  Normal   Started    6m20s (x3 over 6m38s)   kubelet            Started container hero-microservice
+  Warning  Unhealthy  6m15s (x10 over 6m37s)  kubelet            Readiness probe failed: Get "http://172.17.0.13:8080/q/health/ready": dial tcp 172.17.0.13:8080: connect: connection refused
+  Warning  Unhealthy  6m15s (x3 over 6m35s)   kubelet            Liveness probe failed: Get "http://172.17.0.13:8080/q/health/live": dial tcp 172.17.0.13:8080: connect: connection refused
+  Normal   Killing    6m15s (x3 over 6m35s)   kubelet            Container hero-microservice failed liveness probe, will be restarted
+  Warning  BackOff    91s (x13 over 4m36s)    kubelet            Back-off restarting failed container
+

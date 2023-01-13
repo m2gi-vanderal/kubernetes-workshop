@@ -1,0 +1,6 @@
+configmap/hero-config unchanged
+deployment.apps/postgres unchanged
+service/hero-database unchanged
+deployment.apps/hero-microservice configured
+secret/hero-database-secret configured
+service/hero-microservice unchanged

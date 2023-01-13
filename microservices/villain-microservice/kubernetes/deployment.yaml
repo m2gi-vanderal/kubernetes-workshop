@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: villain-microservice
-        image: workshop/supes-monolith:latest
+        image: workshop/villain-monolith:latest
         ports:
         - name: http
           containerPort: 8080

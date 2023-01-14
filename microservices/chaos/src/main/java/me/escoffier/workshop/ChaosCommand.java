@@ -31,7 +31,12 @@ public class ChaosCommand implements Runnable {
             for (OwnerReference reference : pod.getMetadata().getOwnerReferences()) {
                 logger.infof("\t Owner: %s (%s)", reference.getName(), reference.getKind());
             }
+            if(pod.getMetadata().getName().contains(deployment)){
+                logger.infof("Pod %s deleted !", pod.getMetadata().getName());
+                kubernetes.pods().delete(pod);
+            }
         }
+
 
         List<Deployment> deployments = kubernetes.apps().deployments().list().getItems();
         for (Deployment dep : deployments) {

@@ -1,4 +1,4 @@
--- HEROES!
+
 INSERT INTO hero(id, name, otherName, level, picture)
 VALUES (nextval('hibernate_sequence'), 'Stephen Bartowski', 'Stephen Bartowski', '20', 'https://github.com/cescoffier/supes/raw/main/pics/38341.jpg');
 INSERT INTO hero(id, name, otherName, level, picture)

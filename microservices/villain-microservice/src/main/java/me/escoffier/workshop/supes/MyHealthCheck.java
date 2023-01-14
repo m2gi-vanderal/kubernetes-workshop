@@ -1,4 +1,4 @@
-package me.escoffier.workshop;
+package me.escoffier.workshop.supes;
 
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;

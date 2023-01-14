@@ -1,4 +1,4 @@
-package me.escoffier.workshop;
+package me.escoffier.workshop.supes;
 
 import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.faulttolerance.Timeout;
@@ -26,7 +26,7 @@ public interface VillainClient {
     
     @Path("/villains/random")
     @GET
-    Hero getVillain();
+    Villain getVillain();
 
     @Path("/crash")
     @GET

@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: postgres-villain
 spec:
   selector:
     matchLabels:
@@ -13,7 +13,7 @@ spec:
         app: villain-database
     spec:
       containers:
-        - name: postgres
+        - name: postgres-villain
           image: postgres:9.6.5
           ports:
             - containerPort: 5432

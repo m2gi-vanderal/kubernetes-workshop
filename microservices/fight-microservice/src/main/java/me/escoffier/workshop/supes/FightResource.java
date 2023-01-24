@@ -3,6 +3,9 @@ package me.escoffier.workshop.supes;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.logging.Logger;
 
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -16,6 +19,7 @@ public class FightResource {
 
     @GET
     @Path("/fight")
+    @Counted("fight-microservice.print.invocations") 
     public Fight fight() {
         return fight(
                 getRandomHero(),
@@ -34,6 +38,7 @@ public class FightResource {
     @GET
     @Path("/crash/villain")
     @Produces(MediaType.TEXT_PLAIN)
+    @Timed("fight-microservice.crashVillainService.time")
     public String crashVillainService() {
         return villainClient.crash();
     }
@@ -42,6 +47,7 @@ public class FightResource {
     
     @GET
     @Path("/heroes/random")
+    @Timed("fight-microservice.getRandomHero.time")
     public Hero getRandomHero() {
         return heroClient.getHero();
     }
